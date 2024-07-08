@@ -2,7 +2,13 @@ import cv2
 import mediapipe as mp
 import math
 import numpy as np
+import subprocess
+import psutil
+import signal
+import os
  
+ 
+isOn = False 
 # Inicjalizacja MediaPipe Hands
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
@@ -30,8 +36,8 @@ def calculate_distance(point1, point2):
     x2, y2 = point2
     distance = np.sqrt((x2 - x1)**2 + (y2 - y1)**2)
     return distance
- 
- 
+
+
 while True:
     # Pobranie klatki z wideo
     ret, frame = video_capture.read()
@@ -93,8 +99,14 @@ while True:
             #print(distance_tip_mcp)
             if angle > 60 and thumb_tip.y < index_finger_tip.y and isCloseToMcp:
                 cv2.putText(frame, 'Thumbs Up', (thumb_tip_coords[0], 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
+                #if isOn == False :
+                   # p=subprocess.Popen(['C:\Program Files\Mozilla Firefox\\firefox.exe'])
+                    #isOn = True
             elif thumb_tip.y > index_finger_tip.y and isCloseToMcp:
                 cv2.putText(frame, 'Thumbs Down', (thumb_tip_coords[0], 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
+                #if isOn : 
+                    #os.kill(p.pid, -9)
+                    #isOn = False
     # Wyświetlanie obrazu z wykrytymi dłońmi i gestami
     cv2.imshow('Video', frame)
  
