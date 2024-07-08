@@ -92,9 +92,9 @@ while True:
             # Rozpoznanie gestu na podstawie kąta
             #print(distance_tip_mcp)
             if angle > 60 and thumb_tip.y < index_finger_tip.y and isCloseToMcp:
-                cv2.putText(frame, 'Thumbs Up', (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+                cv2.putText(frame, 'Thumbs Up', (thumb_tip_coords[0], 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2, cv2.LINE_AA)
             elif thumb_tip.y > index_finger_tip.y and isCloseToMcp:
-                cv2.putText(frame, 'Thumbs Down', (400, 50), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 2, cv2.LINE_AA)
+                cv2.putText(frame, 'Thumbs Down', (thumb_tip_coords[0], 450), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2, cv2.LINE_AA)
     # Wyświetlanie obrazu z wykrytymi dłońmi i gestami
     cv2.imshow('Video', frame)
  
